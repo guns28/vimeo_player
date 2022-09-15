@@ -14,20 +14,20 @@ import 'package:webview_flutter/webview_flutter.dart';
 ///
 class VimeoPlayer extends StatelessWidget {
   final String videoId;
-
+  final String videoConfigId;
   ///constructor
   ///
   ///
   ///
   const VimeoPlayer({
     Key? key,
-    required this.videoId,
+    required this.videoId, required this.videoConfigId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return WebView(
-      initialUrl: _videoPage(this.videoId),
+      initialUrl: _videoPage(this.videoId, this.videoConfigId),
       javascriptMode: JavascriptMode.unrestricted,
     );
   }
@@ -37,7 +37,7 @@ class VimeoPlayer extends StatelessWidget {
   ///
   ///
   ///
-  String _videoPage(String videoId) {
+  String _videoPage(String videoId, String videoConfigId) {
     final html = '''
             <html>
               <head>
@@ -54,7 +54,7 @@ class VimeoPlayer extends StatelessWidget {
              </head>
              <body>
                 <iframe 
-                src="https://player.vimeo.com/video/$videoId?loop=0&autoplay=0" 
+                src="https://player.vimeo.com/video/$videoId?h=$videoConfigId&loop=0&autoplay=0" 
                 width="100%" height="100%" frameborder="0" allow="fullscreen" 
                 allowfullscreen></iframe>
              </body>
